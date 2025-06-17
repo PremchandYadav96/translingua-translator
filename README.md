@@ -369,3 +369,46 @@ This comprehensive README.md includes:
 - **Support information** for users
 
 The README is structured to be both informative for users and attractive for potential contributors or employers reviewing the project.
+
+---
+
+## 🚀 Deploying to Vercel
+
+This Streamlit application can be easily deployed to Vercel.
+
+1.  **Ensure your project has a `requirements.txt` file** listing all dependencies:
+    ```
+    streamlit
+    google-generativeai
+    python-dotenv
+    ```
+
+2.  **Create a `vercel.json` file** in the root of your project with the following content:
+    ```json
+    {
+      "builds": [
+        {
+          "src": "app.py",
+          "use": "@vercel/python",
+          "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+        }
+      ],
+      "routes": [
+        {
+          "src": "/(.*)",
+          "dest": "app.py"
+        }
+      ]
+    }
+    ```
+    This configuration tells Vercel how to build and serve your Streamlit application.
+
+3.  **Connect your GitHub repository to Vercel.**
+    - Go to your Vercel dashboard and click "Add New... > Project".
+    - Select your Git repository.
+    - Vercel should automatically detect it as a Python project and use the `vercel.json` for deployment settings.
+    - Configure your environment variables (like `GOOGLE_API_KEY`) in the Vercel project settings.
+
+4.  **Deploy!**
+
+This setup ensures that Vercel correctly installs your dependencies and runs the Streamlit application. The `routes` configuration ensures that all incoming traffic is directed to your Streamlit app.
